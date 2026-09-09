@@ -1,7 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import { CheckInOptionsData } from "./checkin-options-data";
+import CheckInService from "../../services/checkin-service";
 
 export default function CheckInOptions() {
+  const checkInService = CheckInService();
+
   const iconClassName = `
     flex
     w-12 h-12
@@ -9,8 +12,10 @@ export default function CheckInOptions() {
     items-center justify-center
   `;
 
-  function handleCardClick() {
-    return alert("Em desenvolvimento");
+  async function handleCardClick() {
+    const result = await checkInService.createCheckIn();
+
+    return alert(result);
   }
 
   return (
