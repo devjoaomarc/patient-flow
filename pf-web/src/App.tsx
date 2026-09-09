@@ -1,5 +1,7 @@
+import CheckInPage from "./pages/CheckIn";
+
 function App() {
-  return <h1>Patient Flow!</h1>;
+  return <CheckInPage />;
 }
 
 export default App;
