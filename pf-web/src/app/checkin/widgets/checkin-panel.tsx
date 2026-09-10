@@ -1,8 +1,9 @@
 import { ArrowRight } from "lucide-react";
-import { CheckInOptionsData } from "./checkin-options-data";
-import CheckInService from "../../services/checkin-service";
 
-export default function CheckInOptions() {
+import { CheckInPanelCards } from "../mock/checkin-panel-cards";
+import CheckInService from "../services/checkin-service";
+
+export default function CheckInPanel() {
   const checkInService = CheckInService();
 
   const iconClassName = `
@@ -28,7 +29,7 @@ export default function CheckInOptions() {
         justify-between
     `}
     >
-      {CheckInOptionsData.map((data) => {
+      {CheckInPanelCards.map((data) => {
         const Icon = data.icon;
 
         return (

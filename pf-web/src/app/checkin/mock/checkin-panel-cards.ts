@@ -5,7 +5,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-interface ICheckInOptionsData {
+interface ICheckInPanelCards {
   icon: LucideIcon;
   service: string;
   message: string;
@@ -19,7 +19,7 @@ interface ICheckInOptionsData {
   };
 }
 
-export const CheckInOptionsData: ICheckInOptionsData[] = [
+export const CheckInPanelCards: ICheckInPanelCards[] = [
   {
     icon: Users,
     service: "Atendimento Normal",

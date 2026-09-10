@@ -1,4 +1,4 @@
-import CheckInPage from "./pages/CheckIn";
+import CheckInPage from "./app/checkin";
 
 function App() {
   return (
