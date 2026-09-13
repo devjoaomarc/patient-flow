@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 import { CheckInPanelCards } from "../mock/checkin-panel-cards";
 import CheckInService from "../services/checkin-service";
+import type { TPriority } from "../types/tpriority";
 
 export default function CheckInPanel() {
   const checkInService = CheckInService();
@@ -13,8 +14,8 @@ export default function CheckInPanel() {
     items-center justify-center
   `;
 
-  async function handleCardClick() {
-    const result = await checkInService.createCheckIn();
+  async function handleCardClick(priority: TPriority) {
+    const result = await checkInService.createCheckIn(priority);
 
     return alert(result);
   }
@@ -35,7 +36,7 @@ export default function CheckInPanel() {
         return (
           <button
             key={data.service}
-            onClick={handleCardClick}
+            onClick={() => handleCardClick(data.priority)}
             className={`
               grid h-64 w-full
               border rounded-3xl

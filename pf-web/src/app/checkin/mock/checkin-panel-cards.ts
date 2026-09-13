@@ -1,29 +1,12 @@
-import {
-  Accessibility,
-  HeartPulse,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
-
-interface ICheckInPanelCards {
-  icon: LucideIcon;
-  service: string;
-  message: string;
-  estimated_time: string;
-  colors: {
-    borderColor: string;
-    icon: string;
-    iconBackground: string;
-    hoverBorder: string;
-    cardBackground: string;
-  };
-}
+import { Accessibility, HeartPulse, Users } from "lucide-react";
+import type { ICheckInPanelCards } from "../interfaces/icheckin-panel-cards";
 
 export const CheckInPanelCards: ICheckInPanelCards[] = [
   {
     icon: Users,
     service: "Atendimento Normal",
     message: "Atendimento por ordem de chegada",
+    priority: "NORMAL",
     estimated_time: "18min",
     colors: {
       borderColor: "border-gray-300",
@@ -37,6 +20,7 @@ export const CheckInPanelCards: ICheckInPanelCards[] = [
     icon: HeartPulse,
     service: "Atendimento Prioritário",
     message: "Para pacientes com prioridade de atendimento",
+    priority: "PRIORITY",
     estimated_time: "10min",
     colors: {
       borderColor: "border-red-100",
@@ -50,6 +34,7 @@ export const CheckInPanelCards: ICheckInPanelCards[] = [
     icon: Accessibility,
     service: "Atendimento 80+",
     message: "Prioridade para pacientes com 80 anos ou mais",
+    priority: "AGE_80_PLUS",
     estimated_time: "5min",
     colors: {
       borderColor: "border-orange-100",

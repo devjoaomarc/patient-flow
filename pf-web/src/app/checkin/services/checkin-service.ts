@@ -1,11 +1,12 @@
 import api from "@/shared/providers/api";
+import type { TPriority } from "../types/tpriority";
 
 export default function CheckInService() {
-  async function createCheckIn() {
+  async function createCheckIn(priority: TPriority) {
     try {
-      const response = await api.get("/checkin");
+      const response = await api.post("/checkin", { priority });
 
-      return response;
+      return JSON.stringify(response.data);
     } catch (error) {
       console.log(error);
     }
