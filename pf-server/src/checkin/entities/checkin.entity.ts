@@ -8,7 +8,7 @@ import {
 import { EPriority } from '../enums/epriority.enum.js';
 import { ECheckInStatus } from '../enums/echeckin-status.enum.js';
 
-@Entity()
+@Entity('tb_checkin')
 export default class Checkin {
   @PrimaryGeneratedColumn('uuid')
   id: string;
