@@ -3,10 +3,8 @@ import { CreateCheckinDto } from './dto/create-checkin.dto.js';
 import { UpdateCheckinDto } from './dto/update-checkin.dto.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import Checkin from './entities/checkin.entity.js';
-import { Repository } from 'typeorm';
+import { Between, Like, Repository } from 'typeorm';
 import { ECheckInStatus } from './enums/echeckin-status.enum.js';
-
-let number = 0;
 
 @Injectable()
 export class CheckinService {
@@ -19,9 +17,7 @@ export class CheckinService {
     try {
       const prefix = createCheckinDto.priority[0].toUpperCase();
 
-      number++;
-
-      const code = `${prefix}${number.toString().padStart(3, '0')}`;
+      const code = await this.findLastCodeOfToday(prefix);
 
       const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
 
@@ -32,7 +28,7 @@ export class CheckinService {
         priority: createCheckinDto.priority,
       });
 
-      this.checkinRepository.save(checkin);
+      await this.checkinRepository.save(checkin);
 
       const { id, createdAt, ...check } = checkin;
 
@@ -40,6 +36,34 @@ export class CheckinService {
     } catch (error) {
       return console.log(error);
     }
+  }
+
+  async findLastCodeOfToday(prefix: string) {
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const endOfToday = new Date();
+    endOfToday.setHours(23, 59, 59, 999);
+
+    const lastCodeOfToday = await this.checkinRepository.findOne({
+      where: {
+        code: Like(`${prefix}%`),
+        createdAt: Between(startOfToday, endOfToday),
+      },
+      order: {
+        createdAt: 'DESC',
+      },
+    });
+
+    if (!lastCodeOfToday) return `${prefix}001`;
+
+    let codeNumber = Number(lastCodeOfToday.code.substring(1));
+
+    codeNumber++;
+
+    const code = `${prefix}${codeNumber.toString().padStart(3, '0')}`;
+
+    return code;
   }
 
   findAll() {
