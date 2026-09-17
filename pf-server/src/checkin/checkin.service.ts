@@ -30,7 +30,7 @@ export class CheckinService {
 
       await this.checkinRepository.save(checkin);
 
-      const { id, createdAt, ...check } = checkin;
+      const { id, ...check } = checkin;
 
       return check;
     } catch (error) {
