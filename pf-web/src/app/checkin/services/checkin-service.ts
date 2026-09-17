@@ -6,7 +6,7 @@ export default function CheckInService() {
     try {
       const response = await api.post("/checkin", { priority });
 
-      return JSON.stringify(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
     }
