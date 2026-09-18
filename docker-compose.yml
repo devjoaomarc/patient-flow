@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-pf
+    restart: always
+
+    environment:
+      POSTGRES_DB: db_pf
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123123
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - pf-network
+
+volumes:
+  postgres_data:
+
+networks:
+  pf-network:
+    driver: bridge
