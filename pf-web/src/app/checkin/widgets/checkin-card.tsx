@@ -22,7 +22,7 @@ export default function CheckInCard({ onClick }: ICheckInCard) {
         grid gap-5
         sm:grid-cols-2
         md:grid-cols-3
-        justify-between
+        justify-items-center
     `}
     >
       {CheckInPanelCards.map((card) => {
