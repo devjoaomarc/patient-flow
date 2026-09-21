@@ -21,7 +21,7 @@ export default function NavOptions() {
             key={menu.label}
             className={({ isActive }) =>
               `
-                p-3 rounded-2xl
+                px-3 py-1 rounded-full
                 hover:bg-brand/20 hover:text-brand
                 ${isActive ? "bg-brand/10 text-brand/70" : "text-gray-400"}
               `

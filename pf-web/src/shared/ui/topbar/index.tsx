@@ -8,7 +8,7 @@ export default function TopBar() {
       className={`
         bg-white
         flex justify-between items-center
-        py-2 px-5 rounded-3xl
+        py-2 px-5 rounded-2xl
       `}
     >
       <TopbarLogo />
