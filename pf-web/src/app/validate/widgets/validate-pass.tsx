@@ -1,6 +1,28 @@
+import type { SubmitEvent } from "react";
+
+import ValidateService from "../services/validate-service";
+
 export default function ValidatePass() {
-  function handleValidatePass() {
-    console.log("hi");
+  const validateService = ValidateService();
+
+  async function handleValidatePass(event: SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const code = formData.get("checkin-code")?.toString().toUpperCase();
+
+    if (!code) return;
+
+    try {
+      const validate = await validateService.validate(code);
+
+      alert(validate)
+
+      return validate;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
