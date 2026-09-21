@@ -1,9 +1,10 @@
-import { Between, Like, Repository } from 'typeorm';
+import { Between, Like, MoreThan, Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { CreateCheckinDto } from './dto/create-checkin.dto.js';
 import { UpdateCheckinDto } from './dto/update-checkin.dto.js';
+import { ValidateCheckinDto } from './dto/validate-checkin.dto.js';
 
 import Checkin from './entities/checkin.entity.js';
 import { ECheckInStatus } from './enums/echeckin-status.enum.js';
@@ -66,6 +67,37 @@ export class CheckinService {
     const code = `${prefix}${codeNumber.toString().padStart(3, '0')}`;
 
     return code;
+  }
+
+  async validate(validateCheckinDto: ValidateCheckinDto) {
+    try {
+      const checkin = await this.findOneByCodeAndNotExpired(
+        validateCheckinDto.code,
+      );
+
+      if (!checkin || checkin.status !== ECheckInStatus.CREATED)
+        return {
+          success: false,
+          message: 'Ticket não encontrado ou expirado.',
+        };
+
+      checkin.status = ECheckInStatus.WAITING;
+
+      await this.checkinRepository.save(checkin);
+
+      return { success: true, message: 'Ticket validado com sucesso.' };
+    } catch (error) {
+      return console.log(error);
+    }
+  }
+
+  async findOneByCodeAndNotExpired(code: string) {
+    return await this.checkinRepository.findOne({
+      where: {
+        code,
+        expiresAt: MoreThan(new Date()),
+      },
+    });
   }
 
   findAll() {

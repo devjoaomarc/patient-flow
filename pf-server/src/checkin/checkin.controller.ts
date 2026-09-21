@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CheckinService } from './checkin.service.js';
 import { CreateCheckinDto } from './dto/create-checkin.dto.js';
 import { UpdateCheckinDto } from './dto/update-checkin.dto.js';
+import { ValidateCheckinDto } from './dto/validate-checkin.dto.js';
 
 @Controller('checkin')
 export class CheckinController {
@@ -10,6 +11,11 @@ export class CheckinController {
   @Post()
   create(@Body() createCheckinDto: CreateCheckinDto) {
     return this.checkinService.create(createCheckinDto);
+  }
+
+  @Patch("/validate")
+  validate(@Body() validateCheckinDTO: ValidateCheckinDto) {
+    return this.checkinService.validate(validateCheckinDTO);
   }
 
   @Get()
