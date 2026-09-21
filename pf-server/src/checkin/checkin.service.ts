@@ -1,9 +1,11 @@
+import { Between, Like, Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
 import { CreateCheckinDto } from './dto/create-checkin.dto.js';
 import { UpdateCheckinDto } from './dto/update-checkin.dto.js';
-import { InjectRepository } from '@nestjs/typeorm';
+
 import Checkin from './entities/checkin.entity.js';
-import { Between, Like, Repository } from 'typeorm';
 import { ECheckInStatus } from './enums/echeckin-status.enum.js';
 
 @Injectable()
@@ -24,7 +26,7 @@ export class CheckinService {
       const checkin = this.checkinRepository.create({
         code,
         expiresAt,
-        status: ECheckInStatus.WAITING,
+        status: ECheckInStatus.CREATED,
         priority: createCheckinDto.priority,
       });
 
