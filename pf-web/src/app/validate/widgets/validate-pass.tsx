@@ -14,13 +14,18 @@ export default function ValidatePass() {
         <label htmlFor="checkin-code" className="text-blue-900">
           Digite o código da senha
         </label>
+
         <input
+          required
           type="text"
           name="checkin-code"
           id="checkin-code"
+          minLength={4}
+          maxLength={4}
+          pattern="[AaNnPp][0-9]{3}"
           placeholder="A051"
           className={`
-            p-4 rounded-3xl min-w-0
+            p-4 rounded-3xl min-w-0 uppercase
             border border-gray-200 bg-white
             text-2xl font-semibold tracking-widest
             placeholder:text-2xl placeholder:text-gray-300
@@ -36,6 +41,8 @@ export default function ValidatePass() {
           bg-brand/50
           text-white text-lg
           self-end
+          transition-transform duration-200
+          hover:scale-[1.01] hover:shadow-lg hover:cursor-pointer
         `}
       >
         Validar atendimento
