@@ -10,8 +10,8 @@ export const routes = {
     label: "Validação",
     logoLabel: "Teminal de check-in"
   },
-  panel: {
-    path: "/panel",
+  display: {
+    path: "/display",
     label: "Painel",
     logoLabel: "Sala de espera"
   },
