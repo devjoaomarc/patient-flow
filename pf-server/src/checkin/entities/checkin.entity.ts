@@ -37,4 +37,7 @@ export default class Checkin {
 
   @Column({ type: 'timestamptz' })
   expiresAt: Date;
+
+  @Column({ type: 'integer', nullable: true })
+  queuePosition: number | null;
 }
