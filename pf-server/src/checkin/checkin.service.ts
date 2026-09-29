@@ -9,11 +9,16 @@ import { ValidateCheckinDto } from './dto/validate-checkin.dto.js';
 import Checkin from './entities/checkin.entity.js';
 import { ECheckInStatus } from './enums/echeckin-status.enum.js';
 
+import { QueueGateway } from '../queue/queue.gateway.js';
+import { QueueService } from '../queue/queue.service.js';
+
 @Injectable()
 export class CheckinService {
   constructor(
     @InjectRepository(Checkin)
     private readonly checkinRepository: Repository<Checkin>,
+    private readonly queueGateway: QueueGateway,
+    private readonly queueService: QueueService,
   ) {}
 
   async create(createCheckinDto: CreateCheckinDto) {
@@ -84,6 +89,10 @@ export class CheckinService {
       checkin.status = ECheckInStatus.WAITING;
 
       await this.checkinRepository.save(checkin);
+
+      await this.queueService.updateQueuePositions();
+
+      this.queueGateway.emitTicketValidated(checkin);
 
       return { success: true, message: 'Ticket validado com sucesso.' };
     } catch (error) {

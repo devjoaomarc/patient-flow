@@ -3,6 +3,7 @@ import { createObserveModule } from '@nestjs/observe';
 import { CheckinModule } from './checkin/checkin.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfig } from './config/database.js';
+import { QueueModule } from './queue/queue.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -15,8 +16,10 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     // }),
     TypeOrmModule.forRoot(databaseConfig),
     CheckinModule,
+    QueueModule,
   ],
   controllers: [],
   providers: [],
 })
+
 export class AppModule {}
