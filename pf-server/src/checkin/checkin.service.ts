@@ -11,6 +11,7 @@ import { ECheckInStatus } from './enums/echeckin-status.enum.js';
 
 import { QueueGateway } from '../queue/queue.gateway.js';
 import { QueueService } from '../queue/queue.service.js';
+import { Cron } from '@nestjs/schedule';
 
 @Injectable()
 export class CheckinService {
@@ -107,6 +108,18 @@ export class CheckinService {
         expiresAt: MoreThan(new Date()),
       },
     });
+  }
+
+  @Cron(process.env.CHECKIN_EXPIRATION_CRON || '0 */2 * * *')
+  async setStatusWaitingToExpiredAfterPresetTime() {
+    return await this.checkinRepository
+      .createQueryBuilder()
+      .update()
+      .set({ status: ECheckInStatus.EXPIRED })
+      .where('status = :status', {
+        status: ECheckInStatus.WAITING,
+      })
+      .execute();
   }
 
   findAll() {
