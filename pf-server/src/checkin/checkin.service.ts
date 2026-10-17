@@ -115,7 +115,7 @@ export class CheckinService {
     return await this.checkinRepository
       .createQueryBuilder()
       .update()
-      .set({ status: ECheckInStatus.EXPIRED })
+      .set({ status: ECheckInStatus.EXPIRED, queuePosition: null })
       .where('status = :status', {
         status: ECheckInStatus.WAITING,
       })
