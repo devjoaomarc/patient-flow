@@ -7,7 +7,7 @@ interface IPanelProps {
 
 export default function Panel({ children, compact }: IPanelProps) {
   return (
-    <section className="py-10">
+    <section className="pb-10">
       <div
         className={`
           p-5 md:p-10

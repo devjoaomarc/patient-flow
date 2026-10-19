@@ -6,7 +6,7 @@ export default function TopBar() {
   return (
     <div
       className={`
-        bg-white
+        bg-white mb-10
         flex justify-between items-center
         py-2 px-5 rounded-2xl
       `}

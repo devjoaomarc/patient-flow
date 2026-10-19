@@ -9,12 +9,12 @@ export default function CurrentAttendancePanel() {
 
         <div className="my-5 p-10 bg-brand/15 rounded-2xl ">
           <div className="flex justify-between items-center">
-            <h2 className="uppercase text-gray-500 tracking-widest text-lg">Senha chamada</h2>
+            <h2 className="uppercase text-gray-500 tracking-widest text-sm sm:text-lg">Senha chamada</h2>
 
             <p
               className={`
                 flex items-center
-                text-sm pr-3
+                text-sm sm:text-xs pr-3
                 rounded-full
                 bg-[#CDE3EC] text-[#007A55]
               `}
@@ -24,9 +24,9 @@ export default function CurrentAttendancePanel() {
             </p>
           </div>
 
-          <div className="text-blue-900 font-bold text-9xl py-5">B034</div>
+          <div className="text-blue-900 font-bold text-7xl md:text-9xl py-5">B034</div>
 
-          <div className="text-2xl my-5 text-brand/90">
+          <div className="text-lg sm:text-2xl my-5 text-brand/90">
             Dirija-se ao atendimento
           </div>
 
@@ -34,7 +34,7 @@ export default function CurrentAttendancePanel() {
             <p className="text-white py-3 px-4 bg-brand/90 rounded-2xl font-bold text-2xl">
               Guichê 02
             </p>
-            <p className="text-gray-400 text-lg">Atendimento prioritário</p>
+            <p className="text-gray-400">Atendimento prioritário</p>
           </div>
         </div>
       </Panel>
