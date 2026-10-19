@@ -3,7 +3,7 @@ import { Dot } from "lucide-react";
 
 export default function CurrentAttendancePanel() {
   return (
-    <div className="lg:col-span-2">
+    <div className="col-span-1 lg:col-span-2">
       <Panel>
         <h1 className="text-blue-900 text-3xl font-bold">Chamada atual</h1>
 
@@ -30,7 +30,7 @@ export default function CurrentAttendancePanel() {
             Dirija-se ao atendimento
           </div>
 
-          <div className="flex gap-5 items-center">
+          <div className="flex flex-wrap gap-5 items-center">
             <p className="text-white py-3 px-4 bg-brand/90 rounded-2xl font-bold text-2xl">
               Guichê 02
             </p>
